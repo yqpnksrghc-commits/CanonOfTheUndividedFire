@@ -96,7 +96,14 @@
   body.only-en .text.fa, body.only-en hr.rule:not(.wide) { display:none; }
   body.only-fa .text.en, body.only-fa hr.rule:not(.wide) { display:none; }
 
-  footer { text-align:center; margin-top:5rem; color:var(--dim); font-size:0.85rem; }
+  .support { text-align:center; margin:2.5rem auto 0; max-width:32rem; }
+  .support p { color:var(--dim); font-size:0.9rem; font-style:italic; margin-bottom:1.1rem; }
+  .sponsor { display:inline-block; padding:0.6rem 1.5rem; border:1px solid var(--ember);
+    color:var(--whitegold); text-decoration:none; letter-spacing:0.08em; font-size:0.9rem;
+    border-radius:2px; transition:background 0.2s, color 0.2s; }
+  .sponsor:hover { background:var(--ember); color:var(--obsidian); }
+
+  footer { text-align:center; margin-top:3.5rem; color:var(--dim); font-size:0.85rem; }
   footer .verse { font-style:italic; color:var(--ember); margin-bottom:1.4rem; font-size:1rem; }
   footer a { color:var(--bronze); text-decoration:none; }
 </style>
@@ -491,6 +498,11 @@ May it be so.</p>
   </section>
 
   <hr class="rule wide">
+
+  <div class="support">
+    <p>This book is free, and always will be. If it has given you something, you may support the work &mdash; never required.</p>
+    <a class="sponsor" href="https://github.com/sponsors/yqpnksrghc-commits">&#9829; Sponsor on GitHub</a>
+  </div>
 
   <footer>
     <p class="verse">The Fire remembers.</p>

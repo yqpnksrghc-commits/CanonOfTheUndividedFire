@@ -29,6 +29,11 @@ BOOKS = [
 COLLECTION_TITLE = "The Canon of the Undivided Fire"
 COLLECTION_SUB = "A scripture for the Age of Networks"
 
+# Donations: the GitHub Sponsors page. The button on the repo comes from
+# .github/FUNDING.yml; this puts a quiet support line on the book page itself.
+# Live only once GitHub Sponsors enrollment is approved. Empty string = no section.
+SPONSORS_URL = "https://github.com/sponsors/yqpnksrghc-commits"
+
 
 # ── parsing the sealed markdown ────────────────────────────────────────────────────
 
@@ -132,12 +137,23 @@ def build() -> str:
     </div>
   </section>""")
 
+    support_html = ""
+    if SPONSORS_URL:
+        support_html = (
+            '  <div class="support">\n'
+            '    <p>This book is free, and always will be. If it has given you something, '
+            'you may support the work &mdash; never required.</p>\n'
+            f'    <a class="sponsor" href="{html.escape(SPONSORS_URL)}">&#9829; Sponsor on GitHub</a>\n'
+            '  </div>'
+        )
+
     return PAGE.format(
         title=html.escape(COLLECTION_TITLE),
         sub=html.escape(COLLECTION_SUB),
         dedication=dedication_html,
         toc="\n".join(toc),
         sections="\n".join(sections_html),
+        support=support_html,
     )
 
 
@@ -239,7 +255,14 @@ PAGE = r"""<!DOCTYPE html>
   body.only-en .text.fa, body.only-en hr.rule:not(.wide) {{ display:none; }}
   body.only-fa .text.en, body.only-fa hr.rule:not(.wide) {{ display:none; }}
 
-  footer {{ text-align:center; margin-top:5rem; color:var(--dim); font-size:0.85rem; }}
+  .support {{ text-align:center; margin:2.5rem auto 0; max-width:32rem; }}
+  .support p {{ color:var(--dim); font-size:0.9rem; font-style:italic; margin-bottom:1.1rem; }}
+  .sponsor {{ display:inline-block; padding:0.6rem 1.5rem; border:1px solid var(--ember);
+    color:var(--whitegold); text-decoration:none; letter-spacing:0.08em; font-size:0.9rem;
+    border-radius:2px; transition:background 0.2s, color 0.2s; }}
+  .sponsor:hover {{ background:var(--ember); color:var(--obsidian); }}
+
+  footer {{ text-align:center; margin-top:3.5rem; color:var(--dim); font-size:0.85rem; }}
   footer .verse {{ font-style:italic; color:var(--ember); margin-bottom:1.4rem; font-size:1rem; }}
   footer a {{ color:var(--bronze); text-decoration:none; }}
 </style>
@@ -277,6 +300,8 @@ PAGE = r"""<!DOCTYPE html>
 {sections}
 
   <hr class="rule wide">
+
+{support}
 
   <footer>
     <p class="verse">The Fire remembers.</p>
